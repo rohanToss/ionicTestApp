@@ -10,19 +10,49 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>New Expense</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-        <ion-item>
-          <ion-label position = "floating">Expense Reason</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position = "floating">Expense Amount</ion-label>
-          <ion-input type="number"></ion-input>
-        </ion-item>
-    </ion-card-content>
-  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-card>
+ 
+          <ion-card-header>
+ 
+            <ion-card-title>New Expense</ion-card-title>
+ 
+          </ion-card-header>
+ 
+          <ion-card-content>
+            <form #userExpense="ngForm" (ngSubmit)="onSubmitExpense(userExpense.value)">
+              <ion-item>
+                <ion-label position="floating">Give your reason ....</ion-label>
+                <ion-input type="text"[(ngModel)]="reason" name="reason" ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">amount deducted </ion-label>
+                <ion-input type="number" [(ngModel)]="amount" name="amount" ></ion-input>
+              </ion-item>
+
+              <div class="ion-margin-vertical ion-text-right">
+                <ion-button type="button" color="danger" fill="outline" (click)="onClear()"> <ion-icon name="close" slot="start"></ion-icon> CLEAR</ion-button>
+                <ion-button type="submit"><ion-icon slot="start" name="add-outline"></ion-icon> ADD EXPENSE</ion-button>
+              </div>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngFor="let expense of expenses"> {{expense.reason}} -- {{expense.amount}} </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Your total expense is ... {{totalExpense}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
 </ion-content>
